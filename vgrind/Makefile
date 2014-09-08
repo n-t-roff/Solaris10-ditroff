@@ -87,10 +87,10 @@ vgrind:
 		chmod a+x $@
 
 ${VFONTEDPR}:	${VFONTEDPROBJS}
-		${CC} -o $@ $?
+		${CC} -o $@ ${VFONTEDPROBJS}
 
 ${RETEST}:	${RETESTOBJS}
-		${CC} -o $@ $?
+		${CC} -o $@ ${RETESTOBJS}
 
 ${LANGDEFS}:
 		cp ${LANGDEFS}.src ${LANGDEFS}
