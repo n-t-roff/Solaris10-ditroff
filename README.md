@@ -18,8 +18,13 @@ The repository can be downloaded with the "Download ZIP" button or with the git 
 ```bash
 git clone https://github.com/n-t-roff/Solaris10-ditroff
 ```
+The default installation root directory is `/usr/local/sunroff`.
+To change the installation paths the file `Makefile` must edited.
+
 The source code is compiled with `make` and installed with `make install`.
 During the build process generated files are removed with `make clean`.
+The content of the `BINDIR` makefile variable (default `/usr/local/sunroff/bin`) must be added to the `PATH` shell variable.
+
 A local git repository is kept up-to-date with `git pull`.
 
-Please report issues to the [issue list](https://github.com/n-t-roff/Solaris10-ditroff/issues).
+If there are any problems please report an issue to the [issue list](https://github.com/n-t-roff/Solaris10-ditroff/issues) or send a mail to [troff at arcor dot de](mailto:troff@arcor.de).
