@@ -52,7 +52,7 @@ char *argv[];
 
 	(void) setlocale(LC_ALL, "");
 
-	sortdir = (access("/crp/tmp", 06)==0) ? "/crp/tmp" : "/usr/tmp";
+	sortdir = TEMPDIR;
 	while (argc>1 && argv[1][0] == '-')
 	{
 		switch(argv[1][1])

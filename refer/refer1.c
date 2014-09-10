@@ -103,7 +103,7 @@ char *argv[];
 	else if (nodeflt == 0)
 		*search++ = "/usr/lib/refer/papers/Ind";
 	if (sort && !labels) {
-		sprintf(ofile, "/tmp/rj%db", getpid());
+		sprintf(ofile, TEMPDIR "/rj%db", getpid());
 		ftemp = fopen(ofile, "w");
 		if (ftemp == NULL) {
 			fprintf(stderr, gettext("Can't open scratch file\n"));
@@ -111,7 +111,7 @@ char *argv[];
 		}
 	}
 	if (endpush) {
-		sprintf(tfile, "/tmp/rj%da", getpid());
+		sprintf(tfile, TEMPDIR "/rj%da", getpid());
 		fo = fopen(tfile, "w");
 		if (fo == NULL) {
 			fo = ftemp;

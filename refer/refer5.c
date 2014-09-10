@@ -157,7 +157,7 @@ char *flds[], *nstline, *endline;
 				strcat(sig, t1);
 			}
 			if (fo == ftemp) {	/* hide if need be */
-				sprintf(hidenam, "/tmp/rj%dc", getpid());
+				sprintf(hidenam, TEMPDIR "/rj%dc", getpid());
 #if EBUG
 				fprintf(stderr, "hiding in %s\n", hidenam);
 #endif

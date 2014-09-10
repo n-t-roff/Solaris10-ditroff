@@ -159,6 +159,11 @@ setov()
 		o[k] = i;
 		w[k] = width(i);
 	}
+	#ifdef OPENSOLARIS
+	if (k >= NOV) {
+		k = NOV - 1;
+	}
+	#endif
 	o[k] = w[k] = 0;
 	if (o[0])
 		for (j = 1; j; ) {

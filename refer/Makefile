@@ -52,6 +52,8 @@ REFDIR =	$(ROOTLIB)/refer
 
 SUBDIRS =	papers
 
+CPPFLAGS =	-DTEMPDIR='"${TEMPDIR}"'
+
 all:		${PROG}
 
 install:	all
@@ -63,6 +65,12 @@ install:	all
 clean:
 		rm -f ${MKEY_OBJS} ${INV_OBJS} ${HUNT_OBJS} ${REFER_OBJS} \
 		    ${ADDBIB_OBJS} ${LOOKBIB_OBJS} ${SORTBIB_OBJS} ${PROG}
+
+uninstall:
+		for i in ${PROG}; do \
+			rm -f ${BINDIR}/$$i; \
+		done
+		-rmdir ${BINDIR}
 
 refer:		${REFER_OBJS}
 		${CC} -o $@ ${REFER_OBJS}

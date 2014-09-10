@@ -23,7 +23,7 @@ OBJS =		y.tab.o $(COBJS)
 
 YFLAGS =	-d
 #CFLAGS =	-g
-CPPFLAGS =	-I. -I..
+CPPFLAGS =	${OPENSOLARIS} -I. -I..
 
 all:		$(PROG) 
 

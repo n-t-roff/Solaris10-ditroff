@@ -34,7 +34,7 @@ char *in, *out, *arg;
 	strcat(argig, ".ig");
 	strcpy (inp=inb, in);
 	if (gfile[0]==0)
-		sprintf(gfile, "/tmp/rj%dg", getpid());
+		sprintf(gfile, TEMPDIR "/rj%dg", getpid());
 # if D1
 	fprintf(stderr, "in grepcall, gfile %s in %o out %o\n", gfile,in,out);
 # endif

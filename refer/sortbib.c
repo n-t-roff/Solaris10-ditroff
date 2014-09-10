@@ -65,7 +65,7 @@ char *argv[];
 	for (i = 1; i < argc; i++)		/* open files in arg list */
 		if ((fp[i-1] = fopen(argv[i], "r")) == NULL)
 			error(argv[i]);
-	strcpy(tempfile, "/tmp/SbibXXXXXX");	/* tempfile for sorting keys */
+	strcpy(tempfile, TEMPDIR "/SbibXXXXXX");	/* tempfile for sorting keys */
 	if ((tmpfd = mkstemp(tempfile)) == -1)
 		error(tempfile);
 

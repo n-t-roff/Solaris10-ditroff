@@ -37,7 +37,6 @@ char *
 errmsg(errnum)
 	int errnum;
 {
-//extern int sys_nerr;
 static char errmsgbuf[18];
 if (errnum > sys_nerr)
 	{

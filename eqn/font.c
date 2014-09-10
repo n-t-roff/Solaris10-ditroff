@@ -54,7 +54,9 @@ fatbox(p) int p; {
 	int sh;
 
 	yyval.token = p;
+	#ifndef OPENSOLARIS
 	sh = ps / 4;
+	#endif
 	nrwid(p, ps, p);
 	printf(".ds %d \\*(%d\\h'-\\n(%du+0.05m'\\*(%d\n", p, p, p, p);
 	if(dbg)printf(".\tfat %d, sh=0.05m\n", p);

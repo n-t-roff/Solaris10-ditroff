@@ -42,8 +42,9 @@ SRCS =		$(TAOBJS:%.o=%.c) $(MAKEDEVOBJS:%.o=%.c) \
 
 TXTS =		README maketables troff.sh
 
-CFLAGS =	-g
-CPPFLAGS =	-DTMACDIR="\"${TMACDIR}\"" \
+#CFLAGS =	-g
+CPPFLAGS =	${OPENSOLARIS} \
+		-DTMACDIR="\"${TMACDIR}\"" \
 		-DFONTDIR="\"${FONTDIR}\"" \
 		-DTEMPDIR="\"${TEMPDIR}\"" \
 		-DUSG -DINCORE -I. -I..

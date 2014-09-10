@@ -8,3 +8,10 @@ install:	all
 
 clean:
 		rm -f ${PROG}
+
+uninstall:
+		rm -f ${BINDIR}/${PROG}
+		-rmdir ${BINDIR}
+
+${PROG}:	${SRC}
+		${CC} -o $@ ${SRC}

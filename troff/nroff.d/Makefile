@@ -38,7 +38,8 @@ COMMONOBJS =	hytab.o n1.o n2.o n3.o n4.o n5.o \
 
 SRCS =		$(OBJS:%.o=%.c) $(COMMONOBJS:%.o=../%.c)
 
-CPPFLAGS =	-DTMACDIR="\"${TMACDIR}\"" \
+CPPFLAGS =	${OPENSOLARIS} \
+		-DTMACDIR="\"${TMACDIR}\"" \
 		-DNTERMDIR="\"${NTERMDIR}\"" \
 		-DTEMPDIR="\"${TEMPDIR}\"" \
 		-DNROFF -DUSG -DINCORE -DEUC -I. -I..
