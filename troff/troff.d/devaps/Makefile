@@ -98,6 +98,7 @@ $(OUTF3) :	HB.out
 
 #install:	all $(ROOTDIRS) $(ROOTPROG) $(ROOTFILES)
 install:
+uninstall:
 
 $(ROOTDIRS):
 		$(INS.dir)

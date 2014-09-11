@@ -49,7 +49,9 @@ all:			$(PROG)
 				echo "Leaveing \"$$PWD/$$dir/\""; \
 			done
 
-install:		$(PROG)
+install:		all
+
+install uninstall:
 			@BINDIR='$(BINDIR)'; export BINDIR; \
 			LIBDIR='$(LIBDIR)'; export LIBDIR; \
 			NTERMDIR='$(NTERMDIR)'; export NTERMDIR; \

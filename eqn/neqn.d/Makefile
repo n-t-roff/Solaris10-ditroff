@@ -35,12 +35,16 @@ y.tab.c: ../$(YACCSRC)
 		mv y.tab.c orig.y.tab.c
 		mv sed.y.tab.c y.tab.c
 
-$(COBJS) :	$(SRCS)
+$(COBJS):	$(SRCS)
 		$(COMPILE.c) ../$(@:%.o=%.c)
 
-install :	all
-		[ -d $(BINDIR) ] || mkdir -p $(BINDIR)
+install:	all
+		@[ -d $(BINDIR) ] || mkdir -p $(BINDIR)
 		install $(PROG) $(BINDIR)/
+
+uninstall:
+		rm -f $(BINDIR)/$(PROG)
+		@rmdir $(BINDIR) 2> /dev/null || true
 
 clean:
 		rm -f $(OBJS) *y.tab.* $(PROG)

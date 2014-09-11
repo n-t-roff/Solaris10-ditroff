@@ -71,13 +71,22 @@ all:		$(PROG) $(LIBPROG) $(TMACPROG) $(RETEST)
 #	/usr/share/lib/tmac.
 #
 install:	all
-		[ -d ${LIBDIR} ] || mkdir -p ${LIBDIR}
+		@[ -d ${LIBDIR} ] || mkdir -p ${LIBDIR}
 		install ${VFONTEDPR} ${LIBDIR}/
 		install -m 644 ${LANGDEFS} ${LIBDIR}/
-		[ -d ${BINDIR} ] || mkdir -p ${BINDIR}
+		@[ -d ${BINDIR} ] || mkdir -p ${BINDIR}
 		install ${PROG} ${BINDIR}/
-		[ -d ${TMACDIR} ] || mkdir -p ${TMACDIR}
+		@[ -d ${TMACDIR} ] || mkdir -p ${TMACDIR}
 		install -m 644 ${MACROS} ${TMACDIR}/
+
+uninstall:
+		rm -f ${LIBDIR}/${VFONTEDPR}
+		rm -f ${LIBDIR}/${LANGDEFS}
+		rm -f ${BINDIR}/${PROG}
+		rm -f ${TMACDIR}/${MACROS}
+		@rmdir ${LIBDIR} 2> /dev/null || true
+		@rmdir ${BINDIR} 2> /dev/null || true
+		@rmdir ${TMACDIR} 2> /dev/null || true
 
 clean:
 		rm -f $(OBJS) ${PROG} ${VFONTEDPR} ${LANGDEFS} $(RETEST)

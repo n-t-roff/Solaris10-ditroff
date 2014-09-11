@@ -42,8 +42,12 @@ $(PROG):	$(OBJS)
 		$(LINK.c) -o $@ $(OBJS) $(LDLIBS)
 
 install:	all
-		[ -d $(BINDIR) ] || mkdir -p $(BINDIR)
+		@[ -d $(BINDIR) ] || mkdir -p $(BINDIR)
 		install $(PROG) $(BINDIR)/
+
+uninstall:
+		rm -f $(BINDIR)/$(PROG)
+		@rmdir $(BINDIR) 2> /dev/bull || true
 
 clean: 
 		rm -f $(OBJS) $(PROG)

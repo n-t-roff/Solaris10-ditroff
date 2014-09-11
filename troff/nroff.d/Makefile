@@ -52,6 +52,8 @@ all:		$(PROG)
 		done
 
 install:	$(PROG)
+		@[ -d $(BINDIR) ] || mkdir -p $(BINDIR)
+		install $(PROG) $(BINDIR)/
 		@LIBDIR='$(LIBDIR)'; export LIBDIR; \
 		NTERMDIR='$(NTERMDIR)'; export NTERMDIR; \
 		for dir in $(SUBDIRS); do \
@@ -59,8 +61,17 @@ install:	$(PROG)
 			(cd "$$dir" && make $@) || exit; \
 			echo "Leaveing \"$$PWD/$$dir/\""; \
 		done
-		[ -d $(BINDIR) ] || mkdir -p $(BINDIR) || exit
-		install $(PROG) $(BINDIR)/ || exit
+
+uninstall:
+		@LIBDIR='$(LIBDIR)'; export LIBDIR; \
+		NTERMDIR='$(NTERMDIR)'; export NTERMDIR; \
+		for dir in $(SUBDIRS); do \
+			echo "Entering \"$$PWD/$$dir/\""; \
+			(cd "$$dir" && make $@) || exit; \
+			echo "Leaveing \"$$PWD/$$dir/\""; \
+		done
+		rm -f $(BINDIR)/$(PROG)
+		@rmdir $(BINDIR) 2> /dev/null || true
 
 clean:
 		@for dir in $(SUBDIRS); do \

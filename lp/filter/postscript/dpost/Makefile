@@ -57,7 +57,12 @@ CPPFLAGS =	-DDFLTENCODING=$(ENCODING)	\
 all:		$(TXTS) $(PROG)
 
 install:	all
-		install -m 755 $(PROG) ${BINDIR}/
+		@[ -d ${BINDIR} ] || mkdir -p ${BINDIR}
+		install $(PROG) ${BINDIR}/
+
+uninstall:
+		rm -f ${BINDIR}/${PROG}
+		@rmdir ${BINDIR} 2> /dev/null || true
 
 $(PROG):	$(OBJS) $(COMMONOBJS)
 		$(LINK.c) -o $@ $(OBJS) $(COMMONOBJS) $(LDLIBS)

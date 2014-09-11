@@ -63,13 +63,13 @@ all :			$(TXTS) $(FONTOUTS) $(FONTNAMES) ${FONTLNK1OUTS} \
 			done
 
 install:		$(TXTS) $(FONTOUTS) $(FONTNAMES)
-			[ -d $(ROOTDEVPOST) ] || mkdir -p $(ROOTDEVPOST)
+			@[ -d $(ROOTDEVPOST) ] || mkdir -p $(ROOTDEVPOST)
 			for i in $(FONTFILES) $(FONTNAMES) ${FONTOUTS}; do \
 				install -m 644 $$i $(ROOTDEVPOST)/; \
 			done
 			install -m 644 ${DESCFILE}.out $(ROOTDEVPOST)/
 			install -m 644 ${DESCFILE} $(ROOTDEVPOST)/;
-			LIBDIR='$(LIBDIR)'; export LIBDIR; \
+			@LIBDIR='$(LIBDIR)'; export LIBDIR; \
 			NTERMDIR='$(NTERMDIR)'; export NTERMDIR; \
 			TMACDIR='$(TMACDIR)'; export TMACDIR; \
 			FONTDIR='$(FONTDIR)'; export FONTDIR; \
@@ -78,6 +78,24 @@ install:		$(TXTS) $(FONTOUTS) $(FONTNAMES)
 				(cd "$$dir" && make $@) || exit; \
 				echo "Leaveing \"$$PWD/$$dir/\""; \
 			done
+
+uninstall:
+			@LIBDIR='$(LIBDIR)'; export LIBDIR; \
+			NTERMDIR='$(NTERMDIR)'; export NTERMDIR; \
+			TMACDIR='$(TMACDIR)'; export TMACDIR; \
+			FONTDIR='$(FONTDIR)'; export FONTDIR; \
+			for dir in $(SUBDIRS); do \
+				echo "Entering \"$$PWD/$$dir/\""; \
+				(cd "$$dir" && make $@) || exit; \
+				echo "Leaveing \"$$PWD/$$dir/\""; \
+			done
+			for i in $(FONTFILES) $(FONTNAMES) ${FONTOUTS}; do \
+				rm -f $(ROOTDEVPOST)/$$i; \
+			done
+			rm -f $(ROOTDEVPOST)/${DESCFILE}.out
+			rm -f $(ROOTDEVPOST)/${DESCFILE};
+			@rmdir $(ROOTDEVPOST) 2> /dev/bull || true
+			@rmdir $(FONTDIR) 2> /dev/bull || true
 
 clean:
 			rm -f $(FONTOUTS) $(FONTLNK1OUTS) $(FONTLNK2OUTS) \

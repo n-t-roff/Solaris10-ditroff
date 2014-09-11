@@ -1,6 +1,6 @@
 SUBDIRS = nroff.d troff.d
 
-all install clean:
+all install clean uninstall:
 		@TEMPDIR='$(TEMPDIR)'; export TEMPDIR; \
 		BINDIR='$(BINDIR)'; export BINDIR; \
 		LIBDIR='$(LIBDIR)'; export LIBDIR; \

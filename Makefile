@@ -12,7 +12,7 @@ PSDIR =		$(LIBDIR)/postscript
 #OPENSOLARIS =	-DOPENSOLARIS
 
 SUBDIRS =	troff lp/filter/postscript eqn tbl col soelim refer diffmk \
-		deroff vgrind
+		deroff vgrind checkeq checknr
 
 all install clean uninstall:
 		@TEMPDIR='$(TEMPDIR)'; export TEMPDIR; \
@@ -29,3 +29,4 @@ all install clean uninstall:
 			(cd "$$dir" && make $@) || exit; \
 			echo "Leaveing \"$$PWD/$$dir/\""; \
 		done
+		@rmdir ${ROOTDIR} 2> /dev/null || true # for uninstall target

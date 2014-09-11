@@ -41,11 +41,18 @@ all:			$(FILES)
 # because of its name, the file ~= is a special case
 #
 install:		all
-			[ -d ${ROOTCHARLIB} ] || mkdir -p ${ROOTCHARLIB}
+			@[ -d ${ROOTCHARLIB} ] || mkdir -p ${ROOTCHARLIB}
 			for file in $(FILES); do \
 				install -m 644 $$file ${ROOTCHARLIB}/; \
 			done
-			rm -f $(ROOTCHARLIB)/~=
+			@rm -f $(ROOTCHARLIB)/~=
 			install -m 644 '~=' $(ROOTCHARLIB)/
+
+uninstall:
+			for file in $(FILES); do \
+				rm -f  ${ROOTCHARLIB}/$$file; \
+			done
+			rm -f $(ROOTCHARLIB)/~=
+			@rmdir ${ROOTCHARLIB} 2> /dev/null || true
 
 clean:

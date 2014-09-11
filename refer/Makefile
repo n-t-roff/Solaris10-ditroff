@@ -57,7 +57,7 @@ CPPFLAGS =	-DTEMPDIR='"${TEMPDIR}"'
 all:		${PROG}
 
 install:	all
-		[ -d ${BINDIR} ] || mkdir -p ${BINDIR}
+		@[ -d ${BINDIR} ] || mkdir -p ${BINDIR}
 		for i in ${PROG}; do \
 			install $$i ${BINDIR}/; \
 		done
@@ -70,7 +70,7 @@ uninstall:
 		for i in ${PROG}; do \
 			rm -f ${BINDIR}/$$i; \
 		done
-		-rmdir ${BINDIR}
+		@rmdir ${BINDIR} 2> /dev/null || true
 
 refer:		${REFER_OBJS}
 		${CC} -o $@ ${REFER_OBJS}

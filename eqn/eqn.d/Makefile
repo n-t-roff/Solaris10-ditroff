@@ -40,8 +40,12 @@ $(COBJS):	$(SRCS)
 		$(COMPILE.c) ../$(@:%.o=%.c)
 
 install:	all
-		[ -d $(BINDIR) ] || mkdir -p $(BINDIR)
+		@[ -d $(BINDIR) ] || mkdir -p $(BINDIR)
 		install $(PROG) $(BINDIR)/
+
+uninstall:
+		rm -f $(BINDIR)/$(PROG)
+		@rmdir -p $(BINDIR) 2> /dev/null || true
 
 clean:
 		rm -f $(OBJS) *y.tab.* $(PROG)

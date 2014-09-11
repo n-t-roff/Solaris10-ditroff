@@ -42,7 +42,7 @@ CPPFLAGS =	-DPSDIR='"${PSDIR}"'		\
 
 all:		$(TXTS) $(OBJS)
 
-install:
+install uninstall:
 
 clean:
 		rm -f $(OBJS)

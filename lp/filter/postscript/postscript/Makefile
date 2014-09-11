@@ -50,9 +50,15 @@ FILES =				\
 all:		$(TXTFILES) $(FILES)
 
 install:	all
-		[ -d ${PSDIR} ] || mkdir -p ${PSDIR}
+		@[ -d ${PSDIR} ] || mkdir -p ${PSDIR}
 		for i in ${FILES}; do \
 			install -m 644 $$i ${PSDIR}/; \
 		done
+
+uninstall:
+		for i in ${FILES}; do \
+			rm -f ${PSDIR}/$$i; \
+		done
+		@rmdir ${PSDIR} 2> /dev/null || true
 
 clean:

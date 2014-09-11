@@ -74,9 +74,10 @@ tab.4000A: tab.4000a
 	ln -s tab.4000a $@
 
 install: all
-	[ -d $(NTERMDIR) ] || mkdir -p $(NTERMDIR) || exit
-	for i in $(TABS); do \
-		install -c -m 644 $$i $(NTERMDIR)/$$i || exit; \
+	@[ -d $(NTERMDIR) ] || mkdir -p $(NTERMDIR)
+	
+	@for i in $(TABS); do \
+		install -c -m 644 $$i $(NTERMDIR)/$$i; \
 	done
 	rm -f $(NTERMDIR)/tab.300S
 	cd $(NTERMDIR) && ln -s tab.300s tab.300S
@@ -84,6 +85,18 @@ install: all
 	cd $(NTERMDIR) && ln -s tab.300s-12 tab.300S-12
 	rm -f $(NTERMDIR)/tab.4000A
 	cd $(NTERMDIR) && ln -s tab.4000a tab.4000A
+
+uninstall:
+	@for i in $(TABS); do \
+		rm -f $(NTERMDIR)/$$i; \
+	done
+	rm -f $(NTERMDIR)/tab.300S
+	rm -f $(NTERMDIR)/tab.300s
+	rm -f $(NTERMDIR)/tab.300S-12
+	rm -f $(NTERMDIR)/tab.300s-12
+	rm -f $(NTERMDIR)/tab.4000A
+	rm -f $(NTERMDIR)/tab.4000a
+	@rmdir $(NTERMDIR) 2> /dev/null || true
 
 clean:
 	rm -f $(TABS) $(LINKS)

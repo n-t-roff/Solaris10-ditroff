@@ -1,6 +1,6 @@
 SUBDIRS =	eqnchar.d neqn.d eqn.d
 
-all install clean:
+all install clean uninstall:
 		@TEMPDIR='$(TEMPDIR)'; export TEMPDIR; \
 		BINDIR='$(BINDIR)'; export BINDIR; \
 		LIBDIR='$(LIBDIR)'; export LIBDIR; \

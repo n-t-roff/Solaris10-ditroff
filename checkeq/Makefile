@@ -1,6 +1,6 @@
-PROG =		col
+PROG =		checkeq
 
-all:		$(PROG)
+all:		$(PROG) 
 
 install:	all
 		@[ -d ${BINDIR} ] || mkdir -p ${BINDIR}
@@ -12,6 +12,3 @@ clean:
 uninstall:
 		rm -f ${BINDIR}/${PROG}
 		@rmdir ${BINDIR} 2> /dev/null || true
-
-${PROG}:	${SRC}
-		${CC} -o $@ ${SRC}

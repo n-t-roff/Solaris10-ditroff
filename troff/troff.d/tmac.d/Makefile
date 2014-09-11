@@ -39,13 +39,22 @@ SEDFILES =	an ansun bib e m s
 all:
 
 install:	$(FILES) ${SEDFILES}
-		[ -d ${TMACDIR} ] || mkdir -p ${TMACDIR} || exit
+		@[ -d ${TMACDIR} ] || mkdir -p ${TMACDIR}
 		for f in ${FILES}; do \
-			install -m 644 $$f ${TMACDIR}/ || exit; \
+			install -m 644 $$f ${TMACDIR}/; \
 		done
 		for file in ${SEDFILES}; do \
 			sed "s'/usr/share/lib/tmac'${TMACDIR}'" $$file > \
 			    ${TMACDIR}/$$file; \
 		done
+
+uninstall:
+		for f in ${FILES}; do \
+			rm -f ${TMACDIR}/$$f; \
+		done
+		for file in ${SEDFILES}; do \
+			rm -f ${TMACDIR}/$$file; \
+		done
+		@rmdir ${TMACDIR} 2>/dev/null || true
 
 clean:
