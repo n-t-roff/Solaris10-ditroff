@@ -84,9 +84,9 @@ uninstall:
 		rm -f ${LIBDIR}/${LANGDEFS}
 		rm -f ${BINDIR}/${PROG}
 		rm -f ${TMACDIR}/${MACROS}
-		@rmdir ${LIBDIR} 2> /dev/null || true
 		@rmdir ${BINDIR} 2> /dev/null || true
 		@rmdir ${TMACDIR} 2> /dev/null || true
+		@rmdir ${LIBDIR} 2> /dev/null || true
 
 clean:
 		rm -f $(OBJS) ${PROG} ${VFONTEDPR} ${LANGDEFS} $(RETEST)
