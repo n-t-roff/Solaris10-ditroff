@@ -703,9 +703,9 @@ collect()
 	register j;
 	register tchar i;
 	register tchar *strp;
-	tchar * lim;
-	tchar * *argpp, **argppend;
-	int	quote;
+	tchar *lim;
+	tchar **argpp, **argppend, *strp0;
+	int quote, right;
 	struct s *savnxf;
 
 	copyf++;
@@ -751,8 +751,8 @@ collect()
 #endif /* 0 */
 	strflg = 0;
 	while ((argpp != argppend) && (!skip())) {
-		*argpp++ = strp;
-		quote = 0;
+		strp0 = strp; /* CK: Bugfix: \} counts \n(.$ */
+		quote = right = 0;
 		if (cbits(i = getch()) == '"')
 			quote++;
 		else 
@@ -767,7 +767,10 @@ collect()
 				ch = i;
 				break;
 			}
-			*strp++ = i;
+			if (cbits(i) == RIGHT)
+				right = 1;
+			else
+				*strp++ = i; /* CK: Bugfix: \} counts \n(.$ */
 			if (strflg && strp >= lim) {
 #if 0
 				errprint("strp=0x%x, lim = 0x%x",
@@ -779,6 +782,8 @@ collect()
 			}
 			SPACETEST(strp, 3 * sizeof(tchar));
 		}
+		if (!right || strp != strp0)
+			*argpp++ = strp0; /* CK: Bugfix: \} counts \n(.$ */
 		*strp++ = 0;
 	}
 	nxf = savnxf;
