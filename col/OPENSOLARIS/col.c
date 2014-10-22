@@ -504,21 +504,21 @@ emit(wchar_t *s, int lineno)
 
 	if (*s) {
 		if (gflag) {
-			(void) putchar(SI);
+			(void) putwchar(SI);
 			gflag = 0;
 		}
 		while (cline < lineno - 1) {
-			(void) putchar('\n');
+			(void) putwchar('\n');
 			pcp = 0;
 			cline += 2;
 		}
 		if (cline != lineno) {
-			(void) putchar(ESC);
-			(void) putchar('9');
+			(void) putwchar(ESC);
+			(void) putwchar('9');
 			cline++;
 		}
 		if (pcp)
-			(void) putchar('\r');
+			(void) putwchar('\r');
 		pcp = 0;
 		p = s;
 		while (*p) {
@@ -526,13 +526,13 @@ emit(wchar_t *s, int lineno)
 			while (*p++ == ' ') {
 				if ((++ncp & 7) == 0 && !xflag) {
 					pcp = ncp;
-					(void) putchar('\t');
+					(void) putwchar('\t');
 				}
 			}
 			if (!*--p)
 				break;
 			while (pcp < ncp) {
-				(void) putchar(' ');
+				(void) putwchar(' ');
 				pcp++;
 			}
 			if (greeked) {
@@ -543,9 +543,9 @@ emit(wchar_t *s, int lineno)
 					    !iscntrl(*chr ^ (gflag ^ GREEK)) &&
 					    !isspace(*chr ^ (gflag ^ GREEK))) {
 						if (gflag)
-							(void) putchar(SI);
+							(void) putwchar(SI);
 						else
-							(void) putchar(SO);
+							(void) putwchar(SO);
 						gflag ^= GREEK;
 					}
 				}
@@ -557,7 +557,7 @@ emit(wchar_t *s, int lineno)
 					if (isascii(cshifted) &&
 					    !iscntrl(cshifted) &&
 					    !isspace(cshifted))
-						(void) putchar(*chr & ~GREEK);
+						(void) putwchar(*chr & ~GREEK);
 				} else
 					(void) putwchar(c);
 			} else
